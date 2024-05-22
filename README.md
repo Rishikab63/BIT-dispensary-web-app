@@ -4,6 +4,7 @@ prescription management, personal information, nursing station activities, medic
 
 The project has been deployed. 
 Link-( https://dispensarydata-85401.web.app/ )
+
 Patient(dummy data)
 username: mca1004223
 password:tula
