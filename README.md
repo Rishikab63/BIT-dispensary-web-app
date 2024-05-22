@@ -1,7 +1,8 @@
 # A comprehensive application (Desktop and Mobile App) for the dispensary at BIT Mesra. The application covers various aspects, including facilities provided, staff timetables,
 prescription management, personal information, nursing station activities, medicine, and ambulance usage.
 
-#The project has been deployed. Link-( https://dispensarydata-85401.web.app/ )
+#The project has been deployed. 
+Link-( https://dispensarydata-85401.web.app/ )
 Patient(dummy data)
 username: mca1004223
 password:tula
