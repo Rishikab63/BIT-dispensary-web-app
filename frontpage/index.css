@@ -123,7 +123,7 @@ body {
     display: flex;
     justify-content: center;
     align-items:flex-start;  
-    background-image: url("https://scontent-del1-1.xx.fbcdn.net/v/t1.6435-9/195645440_3969942913043266_3594169901681258577_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=q6THA0MxbEIAb6X_eVx&_nc_ht=scontent-del1-1.xx&oh=00_AfD_4FIypDpNNyd52RqSZfE08MZcEnNp_2m6RF7zL7_qmw&oe=6649EA34");
+    background-image: url('./images/doctor_team.jpg');
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
