@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="pastrecord.css">
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-database.js"></script>
+</head>
+<body onload="displayUserInfo()">
+<div class="container">
+    <nav class="navbar">
+        <div class="navbar-left">
+          <img src="../images/logobit.png" alt="Logo" class="logo-image">
+          <span class="logo-text">BIT DISPENSARY</span>
+        </div>
+        <div class="navbar-right" id="navbarRight">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="https://dispensarydata-85401.web.app/index.html" class="nav-link">Logout</a>
+          
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="menu-icon" onclick="toggleNavbar()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+        <div class="mainbody">
+            <div class="rightpanel">
+                <div class="userinfo">
+                    <i class="fas fa-user" style="color: black; font-size: 50px; align-self: center; "></i>
+                    <span id = "name" style="font-size:x-large; font-weight: bold;">Past Records</span>
+                    <br>
+               
+
+                </div>
+
+
+            </div>
+            <div class="leftpanel">
+                <div class="headingdetail">
+                    <div class="headingpart2" style="display: flex; flex-wrap: wrap; align-items: center;">
+                        <div><p style="font-size: x-large; font-weight: bold; margin-right: 3rem; ">Prescription</p></div>
+                        
+                       
+                    </div>
+                    
+                </div>
+
+                <div class="prescription" style="visibility: block;">
+                    <div class="container1">
+                        <img src="../images/bitblacklogo.jpg" alt="Hospital Logo" class="logo1">
+                        <br>
+                        <div class="heading1">HOSPITAL OUT-DOOR PATIENT TICKET</div>
+                            
+                        <div class="personal-data">
+                            <div class="firstline"><b>Name : </b><span id = "1name"></span></div>
+                            <div class="second-line"><b>Age/Sex : </b><span  id = "1age"></span>/<span  id = "1sex"></span></div>
+                            <div class="thirdline"><b>EmpCode/Roll No : </b><span  id = "1roll"></span></div>
+                            <div class="fourthline"><b>Address/Phone number : </b><span  id = "1address"></span>/<span  id = "1phno"></span></div>
+                            <p style="color: #588157 ;  font-size: larger; font-weight: bolder;">_____________________________________________________________________________________________________________</p>
+                            <div id="diagonsis" style="display: flex; flex-direction: column; justify-content: left;">
+                               
+                                
+                          </div>
+                         
+
+                          </div>
+                          
+                        </div>
+                        
+                          
+                        </div>
+                    </div>
+
+
+
+                </div>
+                
+
+                </div>
+
+
+            </div>
+
+        </div>
+    
+   
+</div>
+
+   <script>
+     // Function to toggle navbar on mobile view
+    function toggleNavbar() {
+    var navbarRight = document.getElementById("navbarRight");
+    navbarRight.classList.toggle("active");
+        }
+
+    
+function showFields() {
+  var checkbox = document.getElementById("vehicle1");
+  var fields = document.getElementById("fields");
+  if (checkbox.checked) {
+    fields.style.display = "block";
+  } else {
+    fields.style.display = "none";
+  }
+}
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyComvKnubt9K5heFpV8Otuo12f3nJ4d_Do",
+    authDomain: "dispensarydata-85401.firebaseapp.com",
+    databaseURL: "https://dispensarydata-85401-default-rtdb.firebaseio.com",
+    projectId: "dispensarydata-85401",
+    storageBucket: "dispensarydata-85401.appspot.com",
+    messagingSenderId: "816557237732",
+    appId: "1:816557237732:web:c16b3be676d1ea699a93f1"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Reference to the database
+    const database = firebase.database();
+
+//   
+
+
+
+function displayUserInfo() {
+    // Fetch user roll number from URL query parameters
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const rollNumber = urlParams.get('rollnum');
+    const date = urlParams.get('date');
+
+    if (rollNumber && date) {
+        // Fetch user information from Firebase
+        const userRef = firebase.database().ref(`PatientData/${rollNumber}`);
+        userRef.once('value', function(snapshot) {
+            const userData = snapshot.val();
+            if (userData) {
+                // Populate user information
+                document.getElementById('1name').innerText = userData.name;
+                document.getElementById('1age').innerText = userData.age;
+                document.getElementById('1sex').innerText = userData.sex;
+                document.getElementById('1roll').innerText = userData.rollNumber;
+                document.getElementById('1address').innerText = userData.address;
+                document.getElementById('1phno').innerText = userData.phoneNumber;
+
+                // Fetch prescription data
+                const prescriptionRef = firebase.database().ref(`PatientData/${rollNumber}/Prescription/${date}`);
+                prescriptionRef.once('value', function(snapshot) {
+                    const prescriptionData = snapshot.val();
+                    if (prescriptionData) {
+                        // Clear previous prescription display
+                        const diagnosisDiv = document.getElementById('diagonsis');
+                        diagnosisDiv.innerHTML = ''; // Clear previous content
+
+                        // Iterate through prescription data and display inside the diagnosis div
+                        for (const key in prescriptionData) {
+                            if (prescriptionData.hasOwnProperty(key) && key !== 'dispenoutput') {
+                                const value = prescriptionData[key];
+                                const detailElement = document.createElement('div');
+                                detailElement.innerHTML = `<b>${key}:</b> ${value} `;
+                                detailElement.style.marginBottom = '15px';
+                                diagnosisDiv.appendChild(detailElement);
+                            }
+                        }
+                    } else {
+                        console.log('Prescription data not found for the given date');
+                    }
+                });
+            } else {
+                console.log('User data not found for the given roll number');
+            }
+        });
+    } else {
+        console.log('Roll number or date not found in URL');
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById('saveDiagnosisButton').addEventListener('click', function() {
+    var rollNumber = document.getElementById('rollnum').value;
+    var diagnosis = document.getElementById('diagnosisInput').value;
+    var medicineInputs = document.querySelectorAll('.nameofmedicine input[name="medicine"]');
+    var dosageInputs = document.querySelectorAll('.nameofmedicine input[name="dosage"]');
+    var medicineData = {};
+    var nurseInstruction = document.getElementById('instructions').value;
+
+    if (medicineInputs.length === dosageInputs.length) {
+        medicineInputs.forEach(function(medicineInput, index) {
+            var medicineName = medicineInput.value;
+            var dosage = dosageInputs[index].value;
+            if (medicineName) {
+                medicineData[medicineName] = dosage;
+            }
+        });
+
+        savePrescriptionData(rollNumber, diagnosis, medicineData, nurseInstruction);
+    } else {
+        console.log('Incomplete medicine information');
+    }
+});
+
+
+
+
+
+   </script>
+</body>
+
+</html>

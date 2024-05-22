@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="nursetask.css">
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-database.js"></script>
+</head>
+<body onload="displayUserInfo()">
+<div class="container">
+    <nav class="navbar">
+        <div class="navbar-left">
+          <img src="../images/logobit.png" alt="Logo" class="logo-image">
+          <span class="logo-text">BIT DISPENSARY</span>
+        </div>
+        <div class="navbar-right" id="navbarRight">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="https://dispensarydata-85401.web.app/index.html" class="nav-link">Logout</a>
+          
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="menu-icon" onclick="toggleNavbar()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+        <div class="mainbody">
+            <div class="rightpanel">
+                <div class="userinfo">
+                    <i class="fas fa-user" style="color: black; font-size: 50px; align-self: center; "></i>
+                    <span id = "name" style="font-size:x-large; font-weight: bold; align-self: center;">Nurse Task</span>
+                    <br>
+                   
+
+                </div>
+
+
+            </div>
+            <div class="leftpanel">
+                <div class="headingdetail">
+                    <div class="headingpart2" style="display: flex; flex-wrap: wrap; align-items: center;">
+                        <div><p style="font-size: x-large; font-weight: bold; margin-right: 3rem; ">Enter the roll number : </p></div>
+                        <input type="text" name="rollnumber" placeholder="Enter your Roll Number" id ="rollnum"style="height: 2.5rem; width: auto;">
+                    </div>
+                    <button id="gpres" class = "buttons" onclick="displayUserInfo()">Show Details</button>
+                </div>
+
+                <div class="prescription" style="visibility: hidden;">
+                    <div class="container1">
+                        <img src="../images/bitblacklogo.jpg" alt="Hospital Logo" class="logo1">
+                        <br>
+                        <div class="heading1">HOSPITAL OUT-DOOR PATIENT TICKET</div>
+                            
+                        <div class="personal-data">
+                            <div class="firstline"><b>Name : </b><span id = "1name"></span></div>
+                            <div class="second-line"><b>Age/Sex : </b><span  id = "1age"></span>/<span  id = "1sex"></span></div>
+                            <div class="thirdline"><b>EmpCode/Roll No : </b><span  id = "1roll"></span></div>
+                            <div class="fourthline"><b>Address/Phone number : </b><span  id = "1address"></span>/<span  id = "1phno"></span></div>
+                            <div id="diagonsis" style="display: flex; flex-direction: column; justify-content: left;">
+                                <label for="diagnosisInput"><b>Diagnosis:</b></label>
+                                <textarea id="diagnosisInput" name="diagnosisInput" rows="4" cols="50" style="width: fit-content;margin-top: 1%;"></textarea>
+                                
+                                <p style="color: #588157 ;  font-size: larger; font-weight: bolder;">__________________________________________________________</p>
+                          </div>
+                          <div class="nursecheckbox">
+                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"  style="width: 24px; height: 24px; font-size: 20px; border: 2px solid green;"  onclick="showFields()">
+                            <label for="vehicle1">Instruction To Nurse</label>
+                          </div>
+                          <div id="fields" style="display: none;">
+                            <label for="instructions">Give instructions for nurse:</label>
+                            <input type="textarea" id="instructions" style="width: 42vh; height: 5vh;"><br><br>
+                           
+                          </div>
+                          <div class="medicine-container">
+                          <div class="nameofmedicine" style="display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; align-items: left; margin-top: 1%;">
+                            <label for="medicine">Name of Medicine</label>
+                            <input type="text" name="medicine" placeholder="Enter medicine name" style="height: 2.5rem; width: auto;">
+                            <br>
+                            <label for="medicine">Dosage</label>
+                            <input type="text" name="dosage" placeholder="Enter Dosage" style="height: 2.5rem; width: auto;">
+
+                           
+                            <p style="color: #588157 ;  font-size: larger; font-weight: bolder;">__________________________________________________________</p>
+
+                          </div>
+                          
+                        </div>
+                        <button class="buttons plus-button" style="font-size: xx-large; margin-top: 3%;">+</button>
+                        <br>
+                          <button id="saveDiagnosisButton"  class = "buttons" style="margin-top: 2%;">Save Diagnosis</button> 
+                          
+                        </div>
+                    </div>
+
+
+
+                </div>
+                
+
+                </div>
+
+
+            </div>
+
+        </div>
+    
+   
+</div>
+
+   <script>
+     // Function to toggle navbar on mobile view
+    function toggleNavbar() {
+    var navbarRight = document.getElementById("navbarRight");
+    navbarRight.classList.toggle("active");
+        }
+
+    
+function showFields() {
+  var checkbox = document.getElementById("vehicle1");
+  var fields = document.getElementById("fields");
+  if (checkbox.checked) {
+    fields.style.display = "block";
+  } else {
+    fields.style.display = "none";
+  }
+}
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyComvKnubt9K5heFpV8Otuo12f3nJ4d_Do",
+    authDomain: "dispensarydata-85401.firebaseapp.com",
+    databaseURL: "https://dispensarydata-85401-default-rtdb.firebaseio.com",
+    projectId: "dispensarydata-85401",
+    storageBucket: "dispensarydata-85401.appspot.com",
+    messagingSenderId: "816557237732",
+    appId: "1:816557237732:web:c16b3be676d1ea699a93f1"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Reference to the database
+    const database = firebase.database();
+
+ 
+
+
+
+function displayUserInfo() {
+    // Fetch user roll number from input field
+    var rollNumber = document.getElementById('rollnum').value;
+    if (rollNumber) {
+        // Fetch user information from the database using Firebase
+        var userRef = database.ref('PatientData/' + rollNumber + '/Prescription/');
+        userRef.once('value', function(snapshot) {
+            var prescriptionData = snapshot.val();
+            if (prescriptionData) {
+                // Clear previous prescription display
+                var prescriptionContainer = document.querySelector('.prescription');
+                prescriptionContainer.innerHTML = '';
+
+                // Iterate through each prescription entry
+                for (var date in prescriptionData) {
+                    if (prescriptionData.hasOwnProperty(date)) {
+                        var prescriptionEntry = prescriptionData[date];
+                        var prescriptionDiv = document.createElement('div');
+                        prescriptionDiv.classList.add('prescription-entry');
+
+                        // Set red border if nurse instruction is not "none" and nurse output is not present
+                        if (prescriptionEntry.nurseInstruction !== 'none' && !prescriptionEntry.nurseOutput) {
+                            prescriptionDiv.style.border = '2px solid red';
+                        }
+
+                        // Create div for date
+                        var dateDiv = document.createElement('div');
+                        dateDiv.innerText = 'Date: ' + date;
+                        prescriptionDiv.appendChild(dateDiv);
+
+                        // Add click event listener
+                        prescriptionDiv.addEventListener('click', function() {
+                            var clickedPrescriptionEntry = prescriptionData[this.dataset.date];
+                            // Toggle functionality
+                            if (this.expanded) {
+                                // Collapse the div
+                                this.innerHTML = 'Date: ' + this.dataset.date;
+                                this.expanded = false;
+                            } else {
+                                // Expand the div
+                                if (this.style.border === '2px solid red') {
+                                    // Show nurse instruction, nurse output textarea, and save button
+                                    var nurseInstruction = clickedPrescriptionEntry.nurseInstruction;
+                                    var nurseOutputTextarea = document.createElement('textarea');
+                                    nurseOutputTextarea.placeholder = 'Enter nurse output here...';
+                                    nurseOutputTextarea.style.marginLeft = '2em';
+                                    nurseOutputTextarea.style.height= '3em';
+                                    nurseOutputTextarea.style.width= '15em';
+                                    
+                                    var saveButton = document.createElement('button');
+                                    saveButton.style.marginLeft = '2em';
+                                    saveButton.style.backgroundColor = '#588157';
+                                    saveButton.style.color = 'white';
+                                    saveButton.style.height = '3em';
+                                    saveButton.style.width = '7em';
+
+                                    saveButton.innerText = 'Save';
+                                    saveButton.addEventListener('click', function() {
+                                        // Save nurse output in the prescription entry
+                                        clickedPrescriptionEntry.nurseOutput = nurseOutputTextarea.value;
+                                        // Update Firebase database
+                                        userRef.child(this.dataset.date).set(clickedPrescriptionEntry);
+                                    });
+                                    saveButton.dataset.date = this.dataset.date;
+
+                                    this.innerHTML = 'Nurse Instruction: ' + nurseInstruction;
+                                    this.appendChild(nurseOutputTextarea);
+                                    this.appendChild(saveButton);
+
+                                    nurseOutputTextarea.addEventListener('click', function(event) {
+                                        event.stopPropagation();
+                                    });
+                                } else {
+                                    // Show nurse instruction and nurse output
+                                    var nurseInstruction = clickedPrescriptionEntry.nurseInstruction;
+                                    var nurseOutput = clickedPrescriptionEntry.nurseOutput ? 'Nurse Output: ' + clickedPrescriptionEntry.nurseOutput : '';
+                                    this.innerHTML = 'Nurse Instruction: ' + nurseInstruction + '<br>' + nurseOutput;
+                                }
+                                this.expanded = true;
+                            }
+                        });
+
+                        prescriptionDiv.dataset.date = date; // Set dataset for date
+                        // Append div to prescription container
+                        prescriptionContainer.appendChild(prescriptionDiv);
+                    }
+                }
+
+                // Make the prescription visible
+                prescriptionContainer.style.visibility = 'visible';
+            } else {
+                console.log('Prescription data not found');
+            }
+        });
+    } else {
+        console.log('Roll number not entered');
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   // Add an event listener to the plus button
+   document.querySelector('.plus-button').addEventListener('click', function() {
+    // Clone the medicine div
+    var medicineDiv = document.querySelector('.nameofmedicine');
+    var clonedDiv = medicineDiv.cloneNode(true);
+    // Insert the cloned div above the plus button
+    var plusButton = document.querySelector('.plus-button');
+    plusButton.parentNode.insertBefore(clonedDiv, plusButton);
+});
+
+
+function savePrescriptionData(rollNumber, diagnosis, medicineData, nurseInstruction) {
+    if (rollNumber && diagnosis && medicineData) {
+        var today = new Date();
+        var date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
+        var prescriptionRef = database.ref('PatientData/' + rollNumber + '/Prescription/' + date);
+
+        var prescriptionData = {
+            diagnosis: diagnosis,
+            nurseInstruction: nurseInstruction ? nurseInstruction : 'none'
+        };
+
+        for (var medicineName in medicineData) {
+            if (medicineData.hasOwnProperty(medicineName)) {
+                prescriptionData[medicineName] = medicineData[medicineName];
+            }
+        }
+
+        prescriptionRef.set(prescriptionData, function(error) {
+            if (error) {
+                console.error('Error saving prescription:', error);
+            } else {
+                console.log('Prescription saved successfully');
+                alert('Data saved successfully');
+                if (clearInputsCallback && typeof clearInputsCallback === 'function') {
+                    clearInputsCallback();
+                }
+            }
+        });
+    } else {
+        console.log('Incomplete information to save prescription');
+    }
+}
+
+
+
+
+document.getElementById('saveDiagnosisButton').addEventListener('click', function() {
+    var rollNumber = document.getElementById('rollnum').value;
+    var diagnosis = document.getElementById('diagnosisInput').value;
+    var medicineInputs = document.querySelectorAll('.nameofmedicine input[name="medicine"]');
+    var dosageInputs = document.querySelectorAll('.nameofmedicine input[name="dosage"]');
+    var medicineData = {};
+    var nurseInstruction = document.getElementById('instructions').value;
+
+    if (medicineInputs.length === dosageInputs.length) {
+        medicineInputs.forEach(function(medicineInput, index) {
+            var medicineName = medicineInput.value;
+            var dosage = dosageInputs[index].value;
+            if (medicineName) {
+                medicineData[medicineName] = dosage;
+            }
+        });
+
+        savePrescriptionData(rollNumber, diagnosis, medicineData, nurseInstruction);
+    } else {
+        console.log('Incomplete medicine information');
+    }
+});
+
+
+
+
+
+   </script>
+</body>
+
+</html>

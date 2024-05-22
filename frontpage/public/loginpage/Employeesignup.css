@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Castoro:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&display=swap');
+body {
+  margin: 0;
+  font-family: "M PLUS 2", sans-serif;
+}
+
+.navbar {
+  background-color: #588157;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  width: 60px; /* Adjust as needed */
+  height: auto; /* Ensures aspect ratio is maintained */
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-family: 'Castoro Titling', serif;
+  font-size: 24px;
+  color: white;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: large;
+ 
+}
+
+.nav-link:hover {
+  color: lightgrey;
+}
+
+.fa-user {
+  color: white;
+  font-size: 20px;
+}
+
+/* Existing CSS */
+
+.menu-icon {
+    display: none;
+    cursor: pointer;
+    font-size: 25px;
+  }
+  
+  /* Media Query for screen width less than 700px */
+  @media screen and (max-width: 700px) {
+    .navbar-right {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 90px;
+      right: 0;
+      gap:20px;
+      background-color: #1dbab5a0;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+  
+    .navbar-right.active {
+      display: flex;
+    }
+  
+    .menu-icon {
+      display: block;
+      color:white;
+    }
+  }
+  
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "M PLUS 2", sans-serif;
+    
+  
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* background: rgb(193, 252, 211);
+    background: linear-gradient(85deg, rgba(193, 252, 211, 1) 0%, rgba(13, 220, 163, 1) 100%); */
+    background-image: url("../images/meh.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover; /* Cover entire width while maintaining aspect ratio */
+    background-position: center; 
+    
+}
+
+.signup-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    margin-top: -4%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #588157;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: medium;
+}
+
+button:hover {
+    background-color: #45a049;
+}

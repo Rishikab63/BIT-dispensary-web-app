@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="index1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Include the Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script>
+    <!-- Load Firebase Auth component -->
+<script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-database.js"></script>
+<!-- Load other Firebase components as needed -->
+
+    <!-- Include the reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+          <img src="../images/logobit.png" alt="Logo" class="logo-image">
+          <span class="logo-text">BIT DISPENSARY</span>
+        </div>
+        <div class="navbar-right" id="navbarRight">
+          <a href="Forgotpass.html" class="nav-link">Forgot Password</a>
+          <a href="Employeesignup.html" class="nav-link">Employee signup</a>
+          <a href="../frontpage/public/index.html" class="nav-link">Home</a>
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="menu-icon" onclick="toggleNavbar()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    <div class="login-container">
+        <div class="login-box" id="login-box">
+            <h2>Login</h2>
+            <form onsubmit="loginUser(); return false;">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Enter your username">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password">
+                <button type="submit" id="login-button">Login</button>
+            </form>
+            <p>Don't have an account? <a href="#" id="signup-link">Sign Up</a></p>
+        </div>
+        <div class="signup-box" id="signup-box" style="display: none;">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Enter your name">
+                <label for="rollNumber">Roll Number / Employee Code:</label>
+                <input type="text" id="rollNumber" placeholder="Roll number or employee code (without /)">
+                <label for="age">Age:</label>
+                <input type="number" id="age" placeholder="Enter your age">
+                <label for="sex">Sex:</label>
+                <input type="text" id="sex" placeholder="Enter your sex (Male, Female, Transgender, Non-binary)">
+                <label for="address">Address / Hostel No:</label>
+                <input type="text" id="address" placeholder="Enter your address or hostel number">
+                <div id = "sender">
+                <label for="phoneNumber" style="align-self: start;">Phone Number:</label>
+                <input type="tel" id="phoneNumber" placeholder="Phone Number in +91....">
+                <div id = "recaptcha-container" ></div>
+                <input type="button" id="otpsend" value="Send OTP" onclick="phoneAuth()" style="height: 3em; width: 100%; background-color: #588157; border:none; color: white;">
+                </div>
+                <div id="verifier" style="display: none;">
+                    <input type="text" id="verificationcode" placeholder="Enter the OTP">
+                    <input type="button" id ="verify" value="Verify OTP" onclick = "codeverify()" style="height: 3em; width: 100%; background-color: #588157; border:none; color: white;">
+                    <div class="p-conf"> Number Verified </div>
+                    <div class="n-conf"> OTP ERROR </div>
+                </div>
+                <label for="yearOfPassing">Year of Passing:</label>
+                <input type="number" id="yearOfPassing" placeholder="Enter your year of passing">
+                <label for="chronicIllness">Chronic Illness:</label>
+                <input type="text" id="chronicIllness" placeholder="Enter any chronic illness">
+                <label for="createPassword">Create Password:</label>
+                <input type="password" id="createPassword" placeholder="Enter your password">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm your password">
+                <button type="submit" id="signup-button">Sign Up</button>
+                <p>Already have an account? <a href="#" id="login-from-signup">Login</a></p>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1/firebase.js"></script>
+    <script src="forfirebase.js"></script>
+    <script src="index1.js"></script>  
+    
+</body>
+</html>

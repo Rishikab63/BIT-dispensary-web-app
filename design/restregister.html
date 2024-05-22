@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="restregister.css">
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-database.js"></script>
+</head>
+<body onload="displayUserInfo()">
+<div class="container">
+    <nav class="navbar">
+        <div class="navbar-left">
+          <img src="../images/logobit.png" alt="Logo" class="logo-image">
+          <span class="logo-text">BIT DISPENSARY</span>
+        </div>
+        <div class="navbar-right" id="navbarRight">
+          <a href="../frontpage/public/index.html" class="nav-link">Home</a>
+          <a href="../loginpage/index1.html" class="nav-link">Logout</a>
+          
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="menu-icon" onclick="toggleNavbar()">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+        <div class="mainbody">
+            <div class="rightpanel">
+                <div class="userinfo">
+                    <i class="fas fa-user" style="color: black; font-size: 50px; align-self: center; "></i>
+                    <span id = "name" style="font-size:x-large; font-weight: bold;">Rest Register</span>
+                    <br>
+                    
+
+                </div>
+
+
+            </div>
+            <div class="leftpanel">
+                <div class="headingdetail">
+                    <div><p style="font-size: xx-large;"> Rest Register</p></div>
+                    <button id="signout" onclick="addNewStudent()">Add</button>
+                    <button id="edit" class="tempbuttons" onclick="enableEditing()">Edit </button>
+                    <button id="save" class="tempbuttons" onclick="saveDataToFirebase()">Save</button>
+                    
+                </div>
+                <div class="restinfo" id="restinfo">
+                    <!-- <div class="divvy">
+                        <span style="margin-left: 5%; font-size:large; font-weight: bold;">Fill the details of student</span>
+                        <br>
+                        <span id ="name" style="margin-left: 5%;">Name</span>
+                        <br>
+                        <span id ="rnumber" style="margin-left: 5%;">Roll Number</span>
+                        <br>
+                        <span id ="pnumber" style="margin-left: 5%;">Phone Number</span>
+                        <br>
+                        <span id ="noofdays" style="margin-left: 5%;">Total Days</span>
+                        <br>
+                        <button onclick="deleteDiv(`${divId}`)" class="delete-button">Delete</button>
+
+                    </div>
+                     -->
+
+                </div>
+
+
+            </div>
+
+        </div>
+    
+   
+</div>
+
+   <script>
+     // Function to toggle navbar on mobile view
+    function toggleNavbar() {
+    var navbarRight = document.getElementById("navbarRight");
+    navbarRight.classList.toggle("active");
+        }
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyComvKnubt9K5heFpV8Otuo12f3nJ4d_Do",
+    authDomain: "dispensarydata-85401.firebaseapp.com",
+    databaseURL: "https://dispensarydata-85401-default-rtdb.firebaseio.com",
+    projectId: "dispensarydata-85401",
+    storageBucket: "dispensarydata-85401.appspot.com",
+    messagingSenderId: "816557237732",
+    appId: "1:816557237732:web:c16b3be676d1ea699a93f1"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Reference to the database
+    const database = firebase.database();
+
+    function displayUserInfo() {
+    // Fetch user roll number from local storage
+    var rollNumber = localStorage.getItem('bitdispensarycurrentUser');
+    if (rollNumber) {
+        // Fetch user information from the database using Firebase
+        var userRef = database.ref('StaffDB/doctor/' + rollNumber);
+        userRef.once('value', function (snapshot) {
+            var userData = snapshot.val();
+            if (userData) {
+                // Set user information to HTML elements
+                document.getElementById('name').innerText = userData.name;
+                document.getElementById('names').innerText = userData.name;
+                console.log('User data not found');
+            }
+        });
+    } else {
+        console.log('Roll number not found in local storage');
+
+    }
+}
+
+function addNewStudent() {
+        var divCount = document.getElementsByClassName('divvy').length + 1;
+        var divId = 'div' + divCount;
+        var newDiv = document.createElement('div');
+        newDiv.classList.add('divvy');
+        newDiv.innerHTML = `
+            <span style="margin-left: 5%; font-size:large; font-weight: bold;">Fill the details of student</span>
+            <br>
+            <span class="name" style="margin-left: 5%;">Name</span>
+            <br>
+            <span class="rnumber" style="margin-left: 5%;">Roll Number</span>
+            <br>
+            <span class="pnumber" style="margin-left: 5%;">Phone Number</span>
+            <br>
+            <span class="noofdays" style="margin-left: 5%;">Total Days</span>
+            <br>
+            <button onclick="deleteDiv('div${divCount}')" class="delete-button">Delete</button>
+        `;
+        var restInfo = document.getElementById('restinfo');
+        if (restInfo) {
+            restInfo.appendChild(newDiv);
+            newDiv.addEventListener('click', function() {
+                handleDivClick(divId);
+            });
+        } else {
+            console.error("Element with ID 'restinfo' not found.");
+        }
+    }
+
+    function deleteDiv(divId) {
+    // Reference to the div in the Firebase database
+    var divRef = database.ref('restregister/' + divId);
+    // Remove the div from Firebase
+    divRef.remove()
+        .then(function () {
+            console.log('Div deleted successfully from Firebase');
+            alert('Div deleted successfully. Refresh the page');
+            window.location.reload();
+            // Remove the div from the UI
+            var divToRemove = document.getElementById(divId);
+            if (divToRemove) {
+                divToRemove.parentNode.removeChild(divToRemove);
+            }
+        })
+        .catch(function (error) {
+            console.error('Error deleting div from Firebase: ', error);
+        });
+}
+
+function enableEditing() {
+    var divs = document.getElementsByClassName('divvy');
+    for (var i = 0; i < divs.length; i++) {
+        var spans = divs[i].getElementsByTagName('span');
+        for (var j = 0; j < spans.length; j++) {
+            spans[j].setAttribute('contenteditable', 'true');
+        }
+    }
+}
+
+function saveDataToFirebase() {
+    var restInfo = document.getElementById('restinfo');
+    if (restInfo) {
+        var divs = restInfo.getElementsByClassName('divvy');
+        var dataToSave = {};
+        for (var i = 0; i < divs.length; i++) {
+            dataToSave['div' + (i + 1)] = divs[i].innerHTML;
+        }
+        database.ref('restregister').set(dataToSave)
+            .then(function() {
+                console.log("Data saved successfully");
+                alert('Data saved successfully');
+            })
+            .catch(function(error) {
+                console.error("Error saving data: ", error);
+            });
+    } else {
+        console.error("Element with ID 'restinfo' not found.");
+    }
+}
+
+// Function to retrieve data from Firebase and display divs
+function retrieveDataFromFirebase() {
+    database.ref('restregister').once('value')
+        .then(function(snapshot) {
+            var data = snapshot.val();
+            if (data) {
+                var restInfo = document.getElementById('restinfo');
+                if (restInfo) {
+                    for (var key in data) {
+                        var newDiv = document.createElement('div');
+                        newDiv.classList.add('divvy');
+                        newDiv.innerHTML = data[key];
+                        restInfo.appendChild(newDiv);
+                    }
+                } else {
+                    console.error("Element with ID 'restinfo' not found.");
+                }
+            } else {
+                console.log("No data found in Firebase.");
+            }
+        })
+        .catch(function(error) {
+            console.error("Error retrieving data: ", error);
+        });
+}
+
+// Event listener for Save button
+document.getElementById('save').addEventListener('click', function() {
+    saveDataToFirebase();
+});
+
+// Retrieve data from Firebase and display divs on page load
+window.addEventListener('load', function() {
+    retrieveDataFromFirebase();
+});
+    
+
+
+
+   </script>
+</body>
+
+</html>

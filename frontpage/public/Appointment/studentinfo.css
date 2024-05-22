@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&family=Castoro:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@100..900&display=swap');
+body {
+  margin: 0;
+  font-family: "M PLUS 2", sans-serif;
+  
+}
+
+.navbar {
+  /* background-color: #1dbab4; */
+  background-color: #588157;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  width: 60px; /* Adjust as needed */
+  height: auto; /* Ensures aspect ratio is maintained */
+  margin-right: 10px;
+}
+
+.logo-text {
+  font-family: 'Castoro Titling', serif;
+  font-size: 24px;
+  color: white;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+ 
+}
+
+.nav-link:hover {
+  color: lightgrey;
+}
+
+.fa-user {
+  color: white;
+  font-size: 20px;
+}
+
+/* Existing CSS */
+
+.menu-icon {
+    display: none;
+    cursor: pointer;
+    font-size: 25px;
+  }
+  
+  /* Media Query for screen width less than 700px */
+  @media screen and (max-width: 600px) {
+    .navbar-right {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 90px;
+      right: 0;
+      gap:20px;
+      background-color: #1dbab5a0;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+  
+    .navbar-right.active {
+      display: flex;
+    }
+  
+    .menu-icon {
+      display: block;
+      color:white;
+    }
+    
+  }
+
+
+  .container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+  }
+
+  .mainbody{
+    height: 100rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  .rightpanel{
+    background-color: rgba(242, 242, 242, 0.646);
+    width: 20%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    
+  
+  }
+  .leftpanel{
+    background-color: #dad7cd;
+    width: 80%;
+    height: 100vh;
+  }
+  .userinfo{
+    display: flex;
+    flex-direction: column;
+    color: black;
+    margin-top: 40%;
+    gap: 30px;
+  }
+  @media screen and (max-width: 600px) {
+    .rightpanel{
+        width: fit-content;
+      }
+      .leftpanel{
+        width: 60%;
+      } 
+}
+
+.headingdetail{
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    margin-left: 5%;
+    gap: 50%;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  #signout{
+    height: 4rem;
+    width: 7rem;
+    /* background-color: #1dbab4; */
+    background-color: #588157;
+    color: white;
+    border: none;
+    border-radius: 5%;
+    font-size: medium;
+
+
+  }
+  .restinfo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:10%;
+  }
+  .divvy{
+    width: 20rem;
+    height: 8rem;
+    background-color:rgba(242, 242, 242, 0.646);
+    margin-left: 5%;
+    margin-top: 3%;
+    border-radius: 5%;
+    box-shadow:  5px 5px 10px rgba(0, 0, 0, 0.5); 
+  }

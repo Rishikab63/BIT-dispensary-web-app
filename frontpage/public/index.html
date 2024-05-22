@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Bit Dispensary</title>
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-left">
+      <img src="../images/logobit.png" alt="Logo" class="logo-image">
+      <span class="logo-text">BIT DISPENSARY</span>
+    </div>
+    <div class="navbar-right" id="navbarRight">
+      <a href="#" class="nav-link ho" onclick="copyToClipboard('06512276009')">Call An Ambulance</a>
+      <a href="../loginpage/index1.html" class="nav-link ho">Login</a>
+    </div>
+    <div class="menu-icon" onclick="toggleNavbar()">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="container">
+      <div class="main-section">
+        <h1>WELCOME TO BIT DISPENSARY</h1>
+        <p style="font-size: larger;">The official website for BIT Mesra Dispensary </p>
+        
+        <button class="main-btn"  id="openPdfButton">GET STARTED</button>
+      </div>
+    </div>
+    <div class="second-container">
+      <!-- <h1>About us</h1>
+      <li>The present BIT Dispensary is 20 bedded including 8 bedded two isolation wards fully functional Health Care Centre providing facilities to BIT Students, Faculties, their families and staff members & their families plus Villagers around the Campus.</li>
+      <br>
+      <li>The Dispensary is functioning in all the 3 shifts (Round the clock 24x7) including Sunday & Holidays attending all OPD and IPD & Emergency Cases.</li>
+      <br>
+      <li>Presently it is manned by 5 Allopath & 1 Homeopath Doctor put in shift/General shift and about 20 paramedical staff. We have also Dentist, Physiotherapist, Eye, Skin, & Gynecologist as visiting specialist every week for health care service. </li> <br>
+      <li>The workforce, as per the need and work load is quite insufficient and we are in the process of appointing and adding up few more Doctors & Paramedics to give our services in a better way. </li> <br>
+      <li>The dispensary is functioning essentially as a primary health centre and patients who need specialized treatment or hospitalization are referred to multi specialty hospitals. All students and staff members & their two dependent children are covered under Mediclaim policy by Oriental General Insurance Company.</li> <br>
+
+      <li>The Health Centre is equipped with 4 Ambulances, available in all the 3 shifts fitted with Oxygen Cylinders & first aid kits.</li> <br>
+      <li>At present, the following facilities/services are available in the dispensary.</li>
+      <li>OPD services including part time specialist OPD viz.Skin, Eye,  Obs/ Gynecologist & Dental surgeon & Physiotherapist.
+        In patient services for minor ailments.
+        Emergency Services
+        Homeopathy Clinic
+        Dental  Clinic
+        Pathological Laboratory
+        Physiotherapy Unit
+        X-Ray Unit
+        ECG Unit
+        Isolation ward 02 (one each for male & Female patients)
+        Dressing unit</li> -->
+        <div class="row">
+          <div class="card">
+              <h4 class="about-us">24x7 Service</h4>
+              <p>The Dispensary is functioning in all the 3 shifts (Round the clock 24x7) including Sunday & Holidays attending all OPD and IPD & Emergency Cases.</p>
+          </div>
+          <div class="card">
+              <h4>Ambulance Service</h4>
+              <p>The Health Centre is equipped with 4 Ambulances, available in all the 3 shifts fitted with Oxygen Cylinders & first aid kits.</p>
+          </div>
+          <div class="card">
+              <h4>Bedding Facilities</h4>
+              <p>There is 20 bedded including 8 bedded two isolation wards fully functional Health Care Centre providing facilities to BIT Students, Faculties, their families and staff members & their families.</p>
+          </div>
+          <div class="card">
+              <h4>Extra Facilities</h4>
+              <p>OPD services including part time specialist OPD viz.Skin, Eye,  Obs/ Gynecologist & Dental surgeon & Physiotherapist.</p>
+          </div>
+      </div>
+        
+      
+    </div>.
+    <div class="doctor-section">
+      <h1>Dispensary Staffs
+      </h1>
+      <p>The workforce, as per the need and work load is quite insufficient and we are in the process of appointing and adding up few more Doctors & Paramedics to give our services in a better way.
+      The dispensary is functioning essentially as a primary health centre and patients who need specialized treatment or hospitalization are referred to multi specialty hospitals. All students and staff members & their two dependent children are covered under Mediclaim policy by Oriental General Insurance Company.</p>
+      <h3>Medical Officers</h3>
+      <div class="doc-cards">
+        <div class="table">
+          <div class="table-header">
+            <div class="header__item"><a id="name" class="filter__link" href="#">SN</a></div>
+            <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Name of Medical Officer</a></div>
+            <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">Contact Number</a></div>
+            
+          </div>
+          <div class="table-content">	
+            <div class="table-row">		
+              <div class="table-data">1</div>
+              <div class="table-data">Dr. Mona Deepa</div>
+              <div class="table-data">7763855564</div>
+              
+            </div>
+            <div class="table-row">
+              <div class="table-data">2</div>
+              <div class="table-data">Dr.Anju Kumari
+              </div>
+              <div class="table-data">9973962840</div>
+              
+            </div>
+            
+          </div>	
+        </div>
+        <h3>Homeopathy Physician</h3>
+        <div class="table">
+          <div class="table-header">
+            <div class="header__item"><a id="name" class="filter__link" href="#">SN</a></div>
+            <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Name of Homeopathy Physician</a></div>
+            <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">Contact Number</a></div>
+            
+          </div>
+          <div class="table-content">	
+            <div class="table-row">		
+              <div class="table-data">1</div>
+              <div class="table-data">Dr. P Mohanti</div>
+              <div class="table-data">9430118376</div>
+              
+            </div>
+            
+            
+          </div>	
+        </div>
+        <h3>Visiting Specialist
+        </h3>
+        <div class="table">
+          <div class="table-header">
+            <div class="header__item"><a id="name" class="filter__link" href="#">SN</a></div>
+            <div class="header__item"><a id="wins" class="filter__link filter__link--number" href="#">Name of Visiting Specialist
+            </a></div>
+            <div class="header__item"><a id="draws" class="filter__link filter__link--number" href="#">Specialist</a></div>
+            
+          </div>
+          <div class="table-content">	
+            <div class="table-row">		
+              <div class="table-data">1</div>
+              <div class="table-data">Dr. Rishi Raj</div>
+              <div class="table-data">Dentist</div>
+              
+              
+            </div>
+            
+            
+          </div>	
+          <div class="table-content">	
+            <div class="table-row">		
+              <div class="table-data">2</div>
+              <div class="table-data">Dr. Subhdh Kumar
+              </div>
+              <div class="table-data">Pshychiatrist</div>
+              
+              
+            </div>
+            
+            
+          </div>	
+          <div class="table-content">	
+            <div class="table-row">		
+              <div class="table-data">3</div>
+              <div class="table-data">Dr. M.E. Asraf
+              </div>
+              <div class="table-data">Eye specialist
+              </div>
+              <!-- <div class="table-data">9430118376</div>
+              <div class="table-data">9430118376</div> -->
+              
+            </div>
+            
+            
+          </div>	
+          <div class="table-content">	
+            <div class="table-row">		
+              <div class="table-data">4</div>
+              <div class="table-data">Dr. R.P. Chaudhary
+              </div>
+              <div class="table-data">Skin specialist
+              </div>
+              
+              
+            </div>
+            
+            
+          </div>	
+          <div class="table-content">	
+            <div class="table-row">		
+              <div class="table-data">5</div>
+              <div class="table-data">Dr. Pramod Kumar</div>
+              <div class="table-data">Physiotherapist</div>
+              
+              
+            </div>
+            
+            
+          </div>	
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  <center><h1>Gallery</h1></center><br>
+<div class = "gallery">
+  
+  
+  <div class="box">
+    <img src="https://www.bitmesra.ac.in/UploadedDocuments/user_pratyush_869/ContentHeader/DHeader_20160122161056350_efe9d01103c74a1f89ce66228f9cfb92_IMG_0119.JPG">
+    <span>Bedding and ECG</span>
+  </div>
+  <div class="box">
+    <img src="https://kdahweb-static.kokilabenhospital.com/kdah-2019/slider/15799744911957.jpg">
+    <span>Dentist</span>
+  </div>
+  <div class="box">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHCLAbtEbCsfOhiRt_HTb0kDPN45wkS0QVOA&s">
+    <span>Dressing Unit</span>
+  </div>
+  <div class="box">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuCyb5QXwiLrfKBsgeMWwS0KnAECJ4Ksy-pw&s">
+    <span>X-ray Unit</span>
+  </div>
+
+
+</div>
+ 
+<div style="text-align: center; margin-top: 20px; padding: 20px; background-color: #588157; color: white;">
+  <h2>BIT DISPENSARY</h2>
+  <p><b>Designed and Developed by</b></p>
+  <p>Batch MCA 2k23</p>
+  <p>Prachi Pandey (MCA/10042/23), Rishika Bhagat (MCA/10028/23), Sagar Ranjan Prasad (MCA/10040/23)</p>
+  <p>For any queries, call: [9771113973, 9835614816, 9304783154]</p>
+  <p>Or email us at: <a href="mailto:mca10042.23@bitmesra.ac.in?subject=Dispensary">mca10042.23@bitmesra.ac.in</a></p>
+  <p>Copyright © [2024] BIT Mesra. All rights reserved.</p>
+</div>
+
+
+
+  <script>
+    // Function to toggle navbar on mobile view
+function toggleNavbar() {
+   var navbarRight = document.getElementById("navbarRight");
+   navbarRight.classList.toggle("active");
+}
+
+//copy to clipboard function
+function copyToClipboard(text) {
+        var textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        alert("Ambulance Number copied to clipboard: " + text);
+    }
+
+
+    document.getElementById("openPdfButton").addEventListener("click", function() {
+  // Change 'path_to_your_pdf.pdf' to the actual path of your PDF file
+  var pdfUrl = 'loginpage/USERMANUAL.pdf';
+
+  // Open the PDF in a new tab/window
+  window.open(pdfUrl, '_blank');
+});
+
+</script>
+
+</body>
+</html>
